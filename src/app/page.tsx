@@ -1,3 +1,6 @@
+
+'use client';
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,13 +12,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { MenuCategory } from "@/types";
+import type { MenuCategory, MenuItem } from "@/types";
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
+import { ShoppingCart } from "lucide-react";
 
 const menuData: MenuCategory[] = [
     {
         name: "Patty",
         items: [
-            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "https://placehold.co/600x400.png", hint: "aloo patty" },
+            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "/aloo-patty.jpg", hint: "aloo patty" },
             { id: "p2", name: "Paneer Patty", description: "Flaky pastry filled with savory paneer masala.", price: 35, image: "https://placehold.co/600x400.png", hint: "paneer patty" },
         ],
     },
@@ -99,29 +106,48 @@ const menuData: MenuCategory[] = [
     },
 ];
 
-const MenuItemCard = ({ item }: { item: MenuCategory['items'][0] }) => (
-  <Card className="flex flex-col overflow-hidden rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
-    <CardHeader className="p-0">
-      <div className="relative aspect-video w-full">
-        <Image
-          src={item.image}
-          alt={item.name}
-          fill
-          className="object-cover"
-          data-ai-hint={item.hint}
-        />
-      </div>
-    </CardHeader>
-    <CardContent className="flex-grow p-4">
-      <CardTitle className="font-headline text-xl mb-2">{item.name}</CardTitle>
-      <CardDescription>{item.description}</CardDescription>
-    </CardContent>
-    <CardFooter className="flex justify-between items-center p-4 pt-0">
-      <p className="text-lg font-bold text-primary">₹{item.price.toFixed(2)}</p>
-      <Button>Add to Cart</Button>
-    </CardFooter>
-  </Card>
-);
+const MenuItemCard = ({ item, categoryName }: { item: Omit<MenuItem, 'category'>, categoryName: MenuCategory['name'] }) => {
+    const { addToCart } = useCart();
+    const { toast } = useToast();
+
+    const handleAddToCart = () => {
+        const itemToAdd: MenuItem = {
+            ...item,
+            category: categoryName,
+        };
+        addToCart(itemToAdd);
+        toast({
+            title: "Added to cart",
+            description: `${item.name} has been added to your cart.`,
+        });
+    };
+
+    return (
+        <Card className="flex flex-col overflow-hidden rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
+            <CardHeader className="p-0">
+                <div className="relative aspect-video w-full">
+                    <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-cover"
+                    data-ai-hint={item.hint}
+                    />
+                </div>
+            </CardHeader>
+            <CardContent className="flex-grow p-4">
+                <CardTitle className="font-headline text-xl mb-2">{item.name}</CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+            </CardContent>
+            <CardFooter className="flex justify-between items-center p-4 pt-0">
+                <p className="text-lg font-bold text-primary">₹{item.price.toFixed(2)}</p>
+                <Button onClick={handleAddToCart}>
+                    <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+                </Button>
+            </CardFooter>
+        </Card>
+    );
+};
 
 export default function Home() {
   return (
@@ -133,13 +159,15 @@ export default function Home() {
             <p className="text-lg md:text-xl mt-4 max-w-2xl mx-auto text-muted-foreground">
               Discover a world of flavor with our handcrafted cakes, freshly brewed coffee, and savory delights.
             </p>
-             <Button size="lg" className="mt-6">Explore Menu</Button>
+             <Button size="lg" className="mt-6" asChild>
+                <Link href="#menu">Explore Menu</Link>
+             </Button>
           </section>
 
-          <section>
+          <section id="menu">
             <h2 className="font-headline text-4xl text-center mb-8">Our Menu</h2>
             <Tabs defaultValue={menuData[0].name} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 h-auto">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 h-auto flex-wrap">
                 {menuData.map((category) => (
                   <TabsTrigger key={category.name} value={category.name}>{category.name}</TabsTrigger>
                 ))}
@@ -148,7 +176,7 @@ export default function Home() {
                 <TabsContent key={category.name} value={category.name} className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {category.items.map((item) => (
-                      <MenuItemCard key={item.id} item={item} />
+                      <MenuItemCard key={item.id} item={item} categoryName={category.name} />
                     ))}
                   </div>
                 </TabsContent>
