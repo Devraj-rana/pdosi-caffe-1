@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { MenuCategory } from "@/types";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const menuData: MenuCategory[] = [
   {
@@ -78,33 +80,39 @@ const MenuItemCard = ({ item }: { item: MenuCategory['items'][0] }) => (
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <section className="text-center my-12">
-        <h1 className="font-headline text-5xl md:text-7xl font-bold">Welcome to Podosi</h1>
-        <p className="text-lg md:text-xl mt-4 max-w-2xl mx-auto text-muted-foreground">
-          Discover a world of flavor with our handcrafted cakes, freshly brewed coffee, and savory delights.
-        </p>
-      </section>
+    <>
+      <Header />
+      <main className="flex-1">
+        <div className="container mx-auto px-4 py-8">
+          <section className="text-center my-12">
+            <h1 className="font-headline text-5xl md:text-7xl font-bold">Welcome to Pdosi</h1>
+            <p className="text-lg md:text-xl mt-4 max-w-2xl mx-auto text-muted-foreground">
+              Discover a world of flavor with our handcrafted cakes, freshly brewed coffee, and savory delights.
+            </p>
+          </section>
 
-      <section>
-        <h2 className="font-headline text-4xl text-center mb-8">Our Menu</h2>
-        <Tabs defaultValue={menuData[0].name} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 h-auto">
-            {menuData.map((category) => (
-              <TabsTrigger key={category.name} value={category.name}>{category.name}</TabsTrigger>
-            ))}
-          </TabsList>
-          {menuData.map((category) => (
-            <TabsContent key={category.name} value={category.name} className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.items.map((item) => (
-                  <MenuItemCard key={item.id} item={item} />
+          <section>
+            <h2 className="font-headline text-4xl text-center mb-8">Our Menu</h2>
+            <Tabs defaultValue={menuData[0].name} className="w-full">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 h-auto">
+                {menuData.map((category) => (
+                  <TabsTrigger key={category.name} value={category.name}>{category.name}</TabsTrigger>
                 ))}
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
-      </section>
-    </div>
+              </TabsList>
+              {menuData.map((category) => (
+                <TabsContent key={category.name} value={category.name} className="mt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {category.items.map((item) => (
+                      <MenuItemCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </section>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 }

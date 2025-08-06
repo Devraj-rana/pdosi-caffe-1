@@ -6,8 +6,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Podosi Cafe Online",
-  description: "Delicious cakes, coffee, and more from Podosi Cafe.",
+  title: "Pdosi Cafe Online",
+  description: "Delicious cakes, coffee, and more from Pdosi Cafe.",
 };
 
 export default function RootLayout({
@@ -24,9 +24,7 @@ export default function RootLayout({
       </head>
       <body className={cn("min-h-screen bg-background font-body antialiased")}>
         <div className="relative flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          {children}
         </div>
         <Toaster />
       </body>

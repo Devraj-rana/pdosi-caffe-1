@@ -39,10 +39,10 @@ export default function ContactMap() {
         defaultZoom={15}
         gestureHandling={'greedy'}
         disableDefaultUI={true}
-        mapId="podosi_cafe_map"
+        mapId="pdosi_cafe_map"
         className="w-full h-full"
       >
-        <AdvancedMarker position={position} title="Podosi Cafe">
+        <AdvancedMarker position={position} title="Pdosi Cafe">
            <span className="text-3xl">☕</span>
         </AdvancedMarker>
       </Map>

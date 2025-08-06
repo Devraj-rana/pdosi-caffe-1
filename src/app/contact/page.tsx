@@ -40,7 +40,7 @@ export default function ContactPage() {
               <Mail className="h-6 w-6 text-primary mt-1" />
               <div>
                 <h3 className="font-semibold">Email Address</h3>
-                <p className="text-muted-foreground">contact@podosi.cafe</p>
+                <p className="text-muted-foreground">contact@pdosi.cafe</p>
               </div>
             </div>
             <Separator />

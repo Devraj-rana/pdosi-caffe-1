@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center justify-center md:justify-start space-x-2 mb-4">
               <UtensilsCrossed className="h-6 w-6 text-primary" />
-              <span className="font-headline text-xl font-bold">Podosi Cafe</span>
+              <span className="font-headline text-xl font-bold">Pdosi Cafe</span>
             </Link>
             <p className="text-muted-foreground text-sm">
               Your favorite spot for cakes, coffee, and comfort food.
@@ -21,7 +21,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="text-muted-foreground hover:text-primary">Menu</Link></li>
               <li><Link href="/contact" className="text-muted-foreground hover:text-primary">Contact Us</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary">Admin Login</Link></li>
+              <li><Link href="/admin" className="text-muted-foreground hover:text-primary">Admin Login</Link></li>
             </ul>
           </div>
           <div>
@@ -33,7 +33,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center justify-center md:justify-start gap-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <span>contact@podosi.cafe</span>
+                <span>contact@pdosi.cafe</span>
               </li>
                <li className="flex items-center justify-center md:justify-start gap-2">
                  <a href="https://wa.me/911234567890" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-primary">
@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t mt-8 pt-4 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Podosi Cafe. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Pdosi Cafe. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
