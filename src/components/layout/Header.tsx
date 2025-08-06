@@ -37,7 +37,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <UtensilsCrossed className="h-6 w-6 text-primary" />
-          <span className="font-headline text-xl font-bold">Pdosi Cafe</span>
+          <span className="font-headline text-xl font-bold">Delicious Pdosi</span>
         </Link>
 
         <div className="hidden md:flex flex-1 items-center justify-center">
@@ -62,7 +62,7 @@ export default function Header() {
                 <div className="flex flex-col space-y-4">
                     <Link href="/" className="flex items-center space-x-2 mb-4">
                         <UtensilsCrossed className="h-6 w-6 text-primary" />
-                        <span className="font-headline text-xl font-bold">Pdosi Cafe</span>
+                        <span className="font-headline text-xl font-bold">Delicious Pdosi</span>
                     </Link>
                     <nav className="flex flex-col space-y-2">
                       {navLinks.map((link) => (

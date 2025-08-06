@@ -6,8 +6,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Pdosi Cafe Online",
-  description: "Delicious cakes, coffee, and more from Pdosi Cafe.",
+  title: "Delicious Pdosi",
+  description: "Delicious cakes, coffee, and more from Delicious Pdosi.",
 };
 
 export default function RootLayout({

@@ -42,7 +42,7 @@ export default function ContactMap() {
         mapId="pdosi_cafe_map"
         className="w-full h-full"
       >
-        <AdvancedMarker position={position} title="Pdosi Cafe">
+        <AdvancedMarker position={position} title="Delicious Pdosi">
            <span className="text-3xl">☕</span>
         </AdvancedMarker>
       </Map>

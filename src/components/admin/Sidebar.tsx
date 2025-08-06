@@ -17,7 +17,7 @@ export default function Sidebar() {
             <div className="h-16 flex items-center justify-center border-b border-gray-700">
                 <Link href="/admin" className="flex items-center space-x-2">
                     <UtensilsCrossed className="h-8 w-8 text-primary" />
-                    <span className="text-2xl font-bold">Pdosi Admin</span>
+                    <span className="text-2xl font-bold">Delicious Pdosi</span>
                 </Link>
             </div>
             <nav className="flex-1 px-4 py-6 space-y-2">

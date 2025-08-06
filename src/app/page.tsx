@@ -129,7 +129,7 @@ export default function Home() {
       <main className="flex-1">
         <div className="container mx-auto px-4 py-8">
           <section className="text-center my-12">
-            <h1 className="font-headline text-5xl md:text-7xl font-bold">Welcome to Pdosi</h1>
+            <h1 className="font-headline text-5xl md:text-7xl font-bold">Welcome to Delicious Pdosi</h1>
             <p className="text-lg md:text-xl mt-4 max-w-2xl mx-auto text-muted-foreground">
               Discover a world of flavor with our handcrafted cakes, freshly brewed coffee, and savory delights.
             </p>
