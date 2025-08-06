@@ -15,8 +15,8 @@ const menuData: MenuCategory[] = [
     {
         name: "Patty",
         items: [
-            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "/paddy.jpeg", hint: "aloo patty" },
-            { id: "p2", name: "Paneer Patty", description: "Flaky pastry filled with savory paneer masala.", price: 35, image: "/paddy.jpeg", hint: "paneer patty" },
+            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "https://placehold.co/600x400.png", hint: "aloo patty" },
+            { id: "p2", name: "Paneer Patty", description: "Flaky pastry filled with savory paneer masala.", price: 35, image: "https://placehold.co/600x400.png", hint: "paneer patty" },
         ],
     },
     {
