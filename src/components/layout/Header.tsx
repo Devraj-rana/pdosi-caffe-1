@@ -109,7 +109,7 @@ export default function Header() {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Star className="mr-2 h-4 w-4" />
-                <span>Rewards: 125 pts</span>
+                <span>Pdosi Coins: 125 pts</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Ticket className="mr-2 h-4 w-4" />
