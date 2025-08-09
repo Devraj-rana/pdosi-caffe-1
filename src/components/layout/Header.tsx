@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 const navLinks = [
   { href: "/", label: "Menu" },
   { href: "/contact", label: "Contact" },
+  { href: "/admin", label: "Admin" },
 ];
 
 export default function Header() {
@@ -28,7 +29,7 @@ export default function Header() {
           href={link.href}
           className={cn(
             "text-sm font-medium transition-colors hover:text-primary",
-            pathname === link.href ? "text-primary" : "text-muted-foreground"
+            pathname.startsWith(link.href) && link.href !== '/' || pathname === link.href ? "text-primary" : "text-muted-foreground"
           )}
         >
           {link.label}
@@ -85,7 +86,7 @@ export default function Header() {
                           href={link.href}
                           className={cn(
                             "text-lg font-medium transition-colors hover:text-primary",
-                            pathname === link.href ? "text-primary" : "text-foreground"
+                            pathname.startsWith(link.href) && link.href !== '/' || pathname === link.href ? "text-primary" : "text-foreground"
                           )}
                         >
                           {link.label}
