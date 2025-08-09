@@ -1,5 +1,6 @@
 
 'use client';
+import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import AdminHeader from "@/components/admin/AdminHeader";
 import Sidebar from "@/components/admin/Sidebar";
@@ -15,6 +16,21 @@ export default function AdminLayout({
   const router = useRouter();
   const { user, loading } = useAuth();
 
+  useEffect(() => {
+    if (loading) return;
+
+    if (pathname === '/admin/login') {
+      if (user) {
+        router.replace('/admin');
+      }
+    } else {
+      if (!user) {
+        router.replace('/admin/login');
+      }
+    }
+  }, [user, loading, pathname, router]);
+
+
   if (loading) {
     return (
         <div className="flex items-center justify-center min-h-screen">
@@ -29,21 +45,20 @@ export default function AdminLayout({
     )
   }
 
-  if (pathname === '/admin/login') {
-    if (user) {
-      router.replace('/admin');
-      return null;
-    }
+  if (pathname === '/admin/login' && !user) {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             {children}
         </div>
     )
   }
+  
+  if (!user && pathname !== '/admin/login') {
+    return null; // Don't render anything while redirecting
+  }
 
-  if (!user) {
-    router.replace('/admin/login');
-    return null;
+  if (user && pathname === '/admin/login') {
+    return null; // Don't render anything while redirecting
   }
   
   return (
