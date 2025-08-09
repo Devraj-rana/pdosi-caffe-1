@@ -12,12 +12,16 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+
+type DeliveryType = 'Home Delivery' | 'Take Away';
 
 export default function CheckoutForm() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [pincode, setPincode] = useState('');
+    const [deliveryType, setDeliveryType] = useState<DeliveryType>('Home Delivery');
     const [loading, setLoading] = useState(false);
     const { cartItems, getCartTotal, clearCart } = useCart();
     const router = useRouter();
@@ -34,14 +38,25 @@ export default function CheckoutForm() {
             return;
         }
 
+        if (deliveryType === 'Home Delivery' && (!address || !pincode)) {
+            toast({
+                variant: 'destructive',
+                title: 'Address is required',
+                description: 'Please fill in your address and pincode for delivery.',
+            });
+            return;
+        }
+
+
         setLoading(true);
 
         try {
             await addDoc(collection(db, 'orders'), {
                 customerName: name,
                 phoneNumber: phone,
-                address: address,
-                pincode: pincode,
+                address: deliveryType === 'Home Delivery' ? address : '',
+                pincode: deliveryType === 'Home Delivery' ? pincode : '',
+                deliveryType: deliveryType,
                 orderItems: cartItems.map(item => ({
                     id: item.id,
                     name: item.name,
@@ -75,6 +90,24 @@ export default function CheckoutForm() {
             <form onSubmit={handlePlaceOrder}>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
+                        <Label>Delivery Type</Label>
+                        <RadioGroup 
+                            value={deliveryType} 
+                            onValueChange={(value: string) => setDeliveryType(value as DeliveryType)}
+                            className="flex space-x-4"
+                        >
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="Home Delivery" id="home-delivery" />
+                                <Label htmlFor="home-delivery">Home Delivery</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="Take Away" id="take-away" />
+                                <Label htmlFor="take-away">Take Away</Label>
+                            </div>
+                        </RadioGroup>
+                    </div>
+
+                    <div className="space-y-2">
                         <Label htmlFor="name">Full Name</Label>
                         <Input
                             id="name"
@@ -94,21 +127,27 @@ export default function CheckoutForm() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="address">Full Address</Label>
+                        <Label htmlFor="address" className={cn(deliveryType === 'Take Away' && 'text-muted-foreground')}>
+                            Full Address
+                        </Label>
                         <Textarea
                             id="address"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                            required
+                            required={deliveryType === 'Home Delivery'}
+                            disabled={deliveryType === 'Take Away'}
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="pincode">Pincode</Label>
+                        <Label htmlFor="pincode" className={cn(deliveryType === 'Take Away' && 'text-muted-foreground')}>
+                            Pincode
+                        </Label>
                         <Input
                             id="pincode"
                             value={pincode}
                             onChange={(e) => setPincode(e.target.value)}
-                            required
+                            required={deliveryType === 'Home Delivery'}
+                            disabled={deliveryType === 'Take Away'}
                         />
                     </div>
                 </CardContent>
@@ -121,4 +160,3 @@ export default function CheckoutForm() {
         </Card>
     );
 }
-

@@ -18,7 +18,7 @@ export default function OrderSuccessPage() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground mb-6">
-            Thank you for your order. Please keep cash ready at the time of delivery. You will receive updates via SMS.
+            Thank you for your order. You will receive updates via SMS. For deliveries, please keep cash ready.
           </p>
           <div className="flex justify-center gap-4">
             <Button asChild>
