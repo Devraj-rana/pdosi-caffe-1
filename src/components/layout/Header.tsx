@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ShoppingCart, UtensilsCrossed, User, Star, MessageSquare, Search } from "lucide-react";
+import { Menu, ShoppingCart, UtensilsCrossed, User, Star, MessageSquare, Search, MapPin } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
@@ -102,6 +102,10 @@ export default function Header() {
               <DropdownMenuItem>
                 <ShoppingCart className="mr-2 h-4 w-4" />
                 <span>My Orders</span>
+              </DropdownMenuItem>
+               <DropdownMenuItem>
+                <MapPin className="mr-2 h-4 w-4" />
+                <span>My Addresses</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Star className="mr-2 h-4 w-4" />
