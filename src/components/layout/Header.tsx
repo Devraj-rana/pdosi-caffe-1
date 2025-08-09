@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ShoppingCart, UtensilsCrossed, User, Star, MessageSquare } from "lucide-react";
+import { Menu, ShoppingCart, UtensilsCrossed, User, Star, MessageSquare, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
@@ -18,6 +18,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 
 const navLinks = [
   { href: "/", label: "Menu" },
@@ -60,6 +61,11 @@ export default function Header() {
         </div>
 
         <div className="flex items-center space-x-2">
+          <div className="relative hidden md:block">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input type="search" placeholder="Search dishes..." className="pl-9" />
+          </div>
+
           <Button variant="ghost" size="icon" asChild>
             <Link href="/cart">
                 <div className="relative">
@@ -125,6 +131,10 @@ export default function Header() {
                         <UtensilsCrossed className="h-6 w-6 text-primary" />
                         <span className="font-headline text-xl font-bold">Delicious Pdosi</span>
                     </Link>
+                    <div className="relative">
+                      <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                      <Input type="search" placeholder="Search dishes..." className="pl-9" />
+                    </div>
                     <nav className="flex flex-col space-y-2">
                       {navLinks.map((link) => (
                         <Link
