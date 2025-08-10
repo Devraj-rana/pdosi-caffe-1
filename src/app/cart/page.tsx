@@ -41,50 +41,52 @@ export default function CartPage() {
                 </div>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Item</TableHead>
-                    <TableHead>Price</TableHead>
-                    <TableHead className="text-center">Quantity</TableHead>
-                    <TableHead className="text-right">Total</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {cartItems.map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-4">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            width={64}
-                            height={64}
-                            className="rounded-md object-cover"
-                          />
-                          <div>
-                            <p className="font-medium">{item.name}</p>
-                            <p className="text-sm text-muted-foreground">{item.category}</p>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>₹{item.price.toFixed(2)}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-center gap-2">
-                          <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
-                            <MinusCircle className="h-5 w-5" />
-                          </Button>
-                          <span className="font-bold text-lg">{item.quantity}</span>
-                          <Button variant="ghost" size="icon" onClick={() => addToCart(item)}>
-                            <PlusCircle className="h-5 w-5" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right font-medium">₹{(item.price * item.quantity).toFixed(2)}</TableCell>
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Item</TableHead>
+                      <TableHead>Price</TableHead>
+                      <TableHead className="text-center">Quantity</TableHead>
+                      <TableHead className="text-right">Total</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {cartItems.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell>
+                          <div className="flex items-center gap-4 min-w-[200px]">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              width={64}
+                              height={64}
+                              className="rounded-md object-cover"
+                            />
+                            <div>
+                              <p className="font-medium">{item.name}</p>
+                              <p className="text-sm text-muted-foreground">{item.category}</p>
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell>₹{item.price.toFixed(2)}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center justify-center gap-1 md:gap-2">
+                            <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
+                              <MinusCircle className="h-5 w-5" />
+                            </Button>
+                            <span className="font-bold text-lg">{item.quantity}</span>
+                            <Button variant="ghost" size="icon" onClick={() => addToCart(item)}>
+                              <PlusCircle className="h-5 w-5" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right font-medium">₹{(item.price * item.quantity).toFixed(2)}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         </div>
