@@ -15,13 +15,14 @@ import { Button } from '@/components/ui/button';
 import { Pencil, Trash2 } from 'lucide-react';
 import type { MenuCategory } from '@/types';
 import { Badge } from '@/components/ui/badge';
+import { formatINRSimple } from '@/lib/currency';
 
 // This is temporary static data. We will replace this with a Firestore query.
 const menuData: MenuCategory[] = [
     {
         name: "Patty",
         items: [
-            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "https://placehold.co/600x400.png", hint: "aloo patty" },
+            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "/images/menu/aloo-patty.jpg", hint: "aloo patty" },
             { id: "p2", name: "Paneer Patty", description: "Flaky pastry filled with savory paneer masala.", price: 35, image: "https://placehold.co/600x400.png", hint: "paneer patty" },
         ],
     },
@@ -137,10 +138,9 @@ export default function ManageMenuPage() {
                                     />
                                 </TableCell>
                                 <TableCell className="font-medium">{item.name}</TableCell>
-                                <TableCell>
-                                    <Badge variant="outline">{item.category}</Badge>
+                                <TableCell className="font-currency">
+                                    {formatINRSimple(item.price)}
                                 </TableCell>
-                                <TableCell>₹{item.price.toFixed(2)}</TableCell>
                                 <TableCell className="text-right">
                                     <Button variant="ghost" size="icon" className="mr-2">
                                         <Pencil className="h-4 w-4" />

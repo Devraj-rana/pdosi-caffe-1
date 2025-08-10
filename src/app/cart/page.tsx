@@ -2,6 +2,7 @@
 'use client';
 
 import { useCart } from '@/context/CartContext';
+import { formatINRSimple } from '@/lib/currency';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -69,7 +70,7 @@ export default function CartPage() {
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell>₹{item.price.toFixed(2)}</TableCell>
+                        <TableCell className="font-currency">{formatINRSimple(item.price)}</TableCell>
                         <TableCell>
                           <div className="flex items-center justify-center gap-1 md:gap-2">
                             <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
@@ -81,7 +82,7 @@ export default function CartPage() {
                             </Button>
                           </div>
                         </TableCell>
-                        <TableCell className="text-right font-medium">₹{(item.price * item.quantity).toFixed(2)}</TableCell>
+                        <TableCell className="text-right font-medium font-currency">{formatINRSimple(item.price * item.quantity)}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -98,16 +99,16 @@ export default function CartPage() {
             <CardContent className="space-y-4">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>₹{getCartTotal().toFixed(2)}</span>
+                <span className="font-currency">{formatINRSimple(getCartTotal())}</span>
               </div>
               <div className="flex justify-between">
                 <span>Taxes & Charges</span>
-                <span>₹0.00</span>
+                <span className="font-currency">{formatINRSimple(0)}</span>
               </div>
               <Separator />
               <div className="flex justify-between font-bold text-lg">
                 <span>Grand Total</span>
-                <span>₹{getCartTotal().toFixed(2)}</span>
+                <span className="font-currency">{formatINRSimple(getCartTotal())}</span>
               </div>
             </CardContent>
             <CardFooter>

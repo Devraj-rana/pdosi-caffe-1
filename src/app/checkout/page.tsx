@@ -2,6 +2,7 @@
 'use client';
 
 import { useCart } from '@/context/CartContext';
+import { formatINRSimple } from '@/lib/currency';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -39,17 +40,17 @@ export default function CheckoutPage() {
               {cartItems.map((item) => (
                 <div key={item.id} className="flex justify-between items-center text-sm">
                   <span>{item.name} x {item.quantity}</span>
-                  <span>₹{(item.price * item.quantity).toFixed(2)}</span>
+                  <span className="font-currency">{formatINRSimple(item.price * item.quantity)}</span>
                 </div>
               ))}
               <Separator className="my-4" />
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>₹{getCartTotal().toFixed(2)}</span>
+                <span className="font-currency">{formatINRSimple(getCartTotal())}</span>
               </div>
               <div className="flex justify-between">
                 <span>Taxes & Charges</span>
-                <span>₹0.00</span>
+                <span className="font-currency">{formatINRSimple(0)}</span>
               </div>
                <div className="flex justify-between text-primary">
                 <span>Payment Method</span>
@@ -58,7 +59,7 @@ export default function CheckoutPage() {
               <Separator className="my-4" />
               <div className="flex justify-between font-bold text-lg">
                 <span>Grand Total</span>
-                <span>₹{getCartTotal().toFixed(2)}</span>
+                <span className="font-currency">{formatINRSimple(getCartTotal())}</span>
               </div>
             </CardContent>
           </Card>

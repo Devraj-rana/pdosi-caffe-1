@@ -2,6 +2,7 @@
 'use client';
 
 import Image from "next/image";
+import { formatINRSimple } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,7 +23,7 @@ const menuData: MenuCategory[] = [
     {
         name: "Patty",
         items: [
-            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "/aloo-patty.jpg", hint: "aloo patty" },
+            { id: "p1", name: "Aloo Patty", description: "Classic potato patty, spiced and baked to perfection.", price: 25, image: "/images/menu/aloo-patty.jpg", hint: "aloo patty" },
             { id: "p2", name: "Paneer Patty", description: "Flaky pastry filled with savory paneer masala.", price: 35, image: "https://placehold.co/600x400.png", hint: "paneer patty" },
         ],
     },
@@ -140,7 +141,9 @@ const MenuItemCard = ({ item, categoryName }: { item: Omit<MenuItem, 'category'>
                 <CardDescription>{item.description}</CardDescription>
             </CardContent>
             <CardFooter className="flex justify-between items-center p-4 pt-0">
-                <p className="text-lg font-bold text-primary">₹{item.price.toFixed(2)}</p>
+                <p className="text-lg font-bold text-primary font-currency">
+                    {formatINRSimple(item.price)}
+                </p>
                 <Button onClick={handleAddToCart}>
                     <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
                 </Button>

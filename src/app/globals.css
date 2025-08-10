@@ -3,7 +3,18 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "PT Sans", "Noto Sans", "Segoe UI", system-ui, sans-serif;
+}
+
+/* Ensure INR symbol renders correctly with multiple fallbacks */
+.currency {
+  font-family: "Noto Sans", "Segoe UI", "DejaVu Sans", system-ui, sans-serif;
+  font-feature-settings: "kern" 1;
+}
+
+/* Additional utility class for currency display */
+.font-currency {
+  font-family: "Noto Sans", "Segoe UI", "DejaVu Sans", system-ui, sans-serif;
 }
 
 @layer base {

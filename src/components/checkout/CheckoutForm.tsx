@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { formatINRSimple } from '@/lib/currency';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -154,7 +155,9 @@ export default function CheckoutForm() {
                 </CardContent>
                 <CardFooter>
                     <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                        {loading ? 'Placing Order...' : `Place Order (Pay ₹${getCartTotal().toFixed(2)})`}
+                        <span className="font-currency">
+                            {loading ? 'Placing Order...' : `Place Order (Pay ${formatINRSimple(getCartTotal())})`}
+                        </span>
                     </Button>
                 </CardFooter>
             </form>
